@@ -21,5 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
+    expose:
+      - 3306
     ports:
       - "33066:3306"
