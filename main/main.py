@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import uniqueConstraint
+from sqlalchemy import UniqueConstraint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@db/main'
@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 
 
 class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincriment=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     title = db.Column(db.String(200))
     image = db.Column(db.String(200))
 
