@@ -6,4 +6,3 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 ENV FLASK_APP=main
-CMD python main.py
