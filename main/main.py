@@ -3,6 +3,7 @@ import click
 from flask import Flask
 from flask.cli import with_appcontext
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import UniqueConstraint
 
@@ -11,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@db/main'
 CORS(app)
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class Product(db.Model):
@@ -33,26 +35,6 @@ def create():
     db.create_all()
 
 
-@click.command(name='db_init')
-@with_appcontext
-def db_init():
-    db.init()
-
-
-@click.command(name='db_migrate')
-@with_appcontext
-def db_migrate():
-    db.migrate()
-
-
-@app.route('/')
-def index():
-    return 'Hello'
-
-
 app.cli.add_command(create)
-app.cli.add_command(db_init)
-app.cli.add_command(db_migrate)
 if __name__ == '__main__':
-    # app.run(debug=True, host='0.0.0.0')
-    pass
+    app.run(debug=True, host='0.0.0.0')
